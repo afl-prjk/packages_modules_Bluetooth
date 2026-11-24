@@ -2018,9 +2018,8 @@ void smp_process_secure_connection_oob_data(tSMP_CB* p_cb,
   }
 
   if (p_cb->peer_oob_flag == SMP_OOB_PRESENT && !p_sc_oob_data->loc_oob_data.present) {
-    SMP_TRACE_WARNING(
-        "local OOB data is not present but peer claims to have received it; dropping "
-        "connection", __func__);
+    log::warn(
+        "local OOB data is not present but peer claims to have received it; dropping connection");
     tSMP_INT_DATA smp_int_data{};
     smp_int_data.status = SMP_OOB_FAIL;
     smp_sm_event(p_cb, SMP_AUTH_CMPL_EVT, &smp_int_data);

@@ -614,7 +614,7 @@ static void process_service_search_attr_rsp(tCONN_CB* p_ccb, uint8_t* p_reply,
 
     /* If we don't have a valid discovery database, we can't do anything. */
     if (p_ccb->p_db == NULL) {
-      SDP_TRACE_WARNING(
+      log::warn(
           "Attempted continuation or first time request with invalid discovery "
           "database");
       sdp_disconnect(p_ccb, tSDP_STATUS::SDP_INVALID_CONT_STATE);
@@ -859,7 +859,7 @@ static uint8_t* add_attr(uint8_t* p, uint8_t* p_end, tSDP_DISCOVERY_DB* p_db,
   nest_level &= ~(SDP_ADDITIONAL_LIST_MASK);
 
   if (p + sizeof(uint8_t) > p_end) {
-    SDP_TRACE_WARNING("bad arguments to add_addr", __func__);
+    log::warn("bad arguments to add_addr");
     return NULL;
   }
 
